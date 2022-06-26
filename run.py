@@ -17,8 +17,19 @@ def insert_user():
     '''Insert user in db route'''
 
     user_repo = UserRepo()
-    request_body = request.json()
+    request_body = request.json
 
     user_repo.insert_user(request_body['name'])
 
     return jsonify({'msg': 'user created!'})
+
+
+@app.route('/users/list', methods=['GET'])
+def list_users():
+    '''List db users'''
+
+    user_repo = UserRepo()
+
+    users = user_repo.list_users()
+
+    return jsonify(users)
